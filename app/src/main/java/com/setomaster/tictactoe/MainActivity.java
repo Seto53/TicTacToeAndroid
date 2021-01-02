@@ -42,13 +42,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void computerPlay() {
-        Random rand = new Random();
-        int rand_1;
-        do {
-            rand_1 = rand.nextInt(game.getLines() * game.getColumns());
-        } while (game.valueAt(rand_1) != CellValue.EMPTY);
-        game.play(rand_1);
-        update();
+        if (game.getGameState() == GameState.PLAYING) {
+            Random rand = new Random();
+            int rand_1;
+            do {
+                rand_1 = rand.nextInt(game.getLines() * game.getColumns());
+            } while (game.valueAt(rand_1) != CellValue.EMPTY);
+            game.play(rand_1);
+            update();
+        }
     }
 
     public void nextPlay() {
@@ -175,9 +177,12 @@ public class MainActivity extends AppCompatActivity {
             } else if (game.getGameState() == GameState.OWIN) {
                 Toast.makeText(getApplicationContext(), "OWIN", Toast.LENGTH_LONG).show();
             }
-            game = new TicTacToeGame();
-            reset();
         }
+    }
+
+    public void restart(View v) {
+        game = new TicTacToeGame();
+        reset();
     }
 
     private void reset() {
