@@ -12,6 +12,18 @@
         android:layout_height="match_parent"
         app:srcCompat="@drawable/board" />
 
+    <Button
+        android:id="@+id/buttonMessage"
+        android:layout_width="250dp"
+        android:layout_height="79dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="70dp"
+        android:background="#FFFFFF"
+        android:text="Button"
+        android:textAllCaps="false"
+        android:textSize="30dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

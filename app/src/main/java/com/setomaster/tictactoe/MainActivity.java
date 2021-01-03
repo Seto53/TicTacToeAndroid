@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,12 +29,14 @@ public class MainActivity extends AppCompatActivity {
     ImageView cell6;
     ImageView cell7;
     ImageView cell8;
+    Button message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        message = findViewById(R.id.buttonMessage);
         cell0 = findViewById(R.id.cell0);
         cell1 = findViewById(R.id.cell1);
         cell2 = findViewById(R.id.cell2);
@@ -44,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
         cell6 = findViewById(R.id.cell6);
         cell7 = findViewById(R.id.cell7);
         cell8 = findViewById(R.id.cell8);
+        if (gameMode == 0) {
+            message.setText(game.nextCellValue() + " turn");
+        }
     }
 
     public void computerPlay() {
@@ -51,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             Random rand = new Random();
             int rand_1;
             do {
-                rand_1 = rand.nextInt(game.getLines() * game.getColumns());
+                rand_1 = rand.nextInt(9);
             } while (game.valueAt(rand_1) != CellValue.EMPTY);
             game.play(rand_1);
             update(rand_1);
@@ -59,65 +64,49 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void nextPlay(int pos) {
-        game.play(pos);
-        update(pos);
-        if (gameMode == 0) {
+        if (game.valueAt(pos) == CellValue.EMPTY && game.getGameState() == GameState.PLAYING) {
+            game.play(pos);
+            update(pos);
+        }
+        if (gameMode == 0 && game.getGameState() == GameState.PLAYING) {
             computerPlay();
         }
     }
 
     public void cell0(View v) {
-        if (game.valueAt(0) == CellValue.EMPTY) {
-            nextPlay(0);
-        }
+        nextPlay(0);
     }
 
     public void cell1(View v) {
-        if (game.valueAt(1) == CellValue.EMPTY) {
-            nextPlay(1);
-        }
+        nextPlay(1);
     }
 
     public void cell2(View v) {
-        if (game.valueAt(2) == CellValue.EMPTY) {
-            nextPlay(2);
-        }
+        nextPlay(2);
     }
 
     public void cell3(View v) {
-        if (game.valueAt(3) == CellValue.EMPTY) {
-            nextPlay(3);
-        }
+        nextPlay(3);
     }
 
     public void cell4(View v) {
-        if (game.valueAt(4) == CellValue.EMPTY) {
-            nextPlay(4);
-        }
+        nextPlay(4);
     }
 
     public void cell5(View v) {
-        if (game.valueAt(5) == CellValue.EMPTY) {
-            nextPlay(5);
-        }
+        nextPlay(5);
     }
 
     public void cell6(View v) {
-        if (game.valueAt(6) == CellValue.EMPTY) {
-            nextPlay(6);
-        }
+        nextPlay(6);
     }
 
     public void cell7(View v) {
-        if (game.valueAt(7) == CellValue.EMPTY) {
-            nextPlay(7);
-        }
+        nextPlay(7);
     }
 
     public void cell8(View v) {
-        if (game.valueAt(8) == CellValue.EMPTY) {
-            nextPlay(8);
-        }
+        nextPlay(8);
     }
 
     private void update(int pos) {
@@ -188,19 +177,21 @@ public class MainActivity extends AppCompatActivity {
         }
         if (game.getGameState() != GameState.PLAYING) {
             if (game.getGameState() == GameState.DRAW) {
-                Toast.makeText(getApplicationContext(), "DRAW", Toast.LENGTH_LONG).show();
+                message.setText("Draw");
             } else if (game.getGameState() == GameState.XWIN) {
-                Toast.makeText(getApplicationContext(), "XWIN", Toast.LENGTH_LONG).show();
+                message.setText("X Wins");
             } else if (game.getGameState() == GameState.OWIN) {
-                Toast.makeText(getApplicationContext(), "OWIN", Toast.LENGTH_LONG).show();
+                message.setText("O Wins");
             }
+        } else {
+            message.setText(game.nextCellValue() + " turn");
         }
     }
 
     public void restart(View v) {
         game = new TicTacToeGame();
         reset();
-        Toast.makeText(getApplicationContext(), "Restart", Toast.LENGTH_LONG).show();
+        message.setText(game.nextCellValue() + " turn");
     }
 
     private void reset() {
