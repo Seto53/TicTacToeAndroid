@@ -1,7 +1,12 @@
 package com.setomaster.tictactoe;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -49,12 +54,13 @@ public class MainActivity extends AppCompatActivity {
                 rand_1 = rand.nextInt(game.getLines() * game.getColumns());
             } while (game.valueAt(rand_1) != CellValue.EMPTY);
             game.play(rand_1);
-            update();
+            update(rand_1);
         }
     }
 
-    public void nextPlay() {
-        update();
+    public void nextPlay(int pos) {
+        game.play(pos);
+        update(pos);
         if (gameMode == 0) {
             computerPlay();
         }
@@ -62,112 +68,123 @@ public class MainActivity extends AppCompatActivity {
 
     public void cell0(View v) {
         if (game.valueAt(0) == CellValue.EMPTY) {
-            game.play(0);
-            nextPlay();
+            nextPlay(0);
         }
     }
 
     public void cell1(View v) {
         if (game.valueAt(1) == CellValue.EMPTY) {
-            game.play(1);
-            nextPlay();
+            nextPlay(1);
         }
     }
 
     public void cell2(View v) {
         if (game.valueAt(2) == CellValue.EMPTY) {
-            game.play(2);
-            nextPlay();
+            nextPlay(2);
         }
     }
 
     public void cell3(View v) {
         if (game.valueAt(3) == CellValue.EMPTY) {
-            game.play(3);
-            nextPlay();
+            nextPlay(3);
         }
     }
 
     public void cell4(View v) {
         if (game.valueAt(4) == CellValue.EMPTY) {
-            game.play(4);
-            nextPlay();
+            nextPlay(4);
         }
     }
 
     public void cell5(View v) {
         if (game.valueAt(5) == CellValue.EMPTY) {
-            game.play(5);
-            nextPlay();
+            nextPlay(5);
         }
     }
 
     public void cell6(View v) {
         if (game.valueAt(6) == CellValue.EMPTY) {
-            game.play(6);
-            nextPlay();
+            nextPlay(6);
         }
     }
 
     public void cell7(View v) {
         if (game.valueAt(7) == CellValue.EMPTY) {
-            game.play(7);
-            nextPlay();
+            nextPlay(7);
         }
     }
 
     public void cell8(View v) {
         if (game.valueAt(8) == CellValue.EMPTY) {
-            game.play(8);
-            nextPlay();
+            nextPlay(8);
         }
     }
 
-    private void update() {
-        if (game.valueAt(0) == CellValue.X) {
-            cell0.setImageResource(R.drawable.x);
-        } else if (game.valueAt(0) == CellValue.O) {
-            cell0.setImageResource(R.drawable.o);
-        }
-        if (game.valueAt(1) == CellValue.X) {
-            cell1.setImageResource(R.drawable.x);
-        } else if (game.valueAt(1) == CellValue.O) {
-            cell1.setImageResource(R.drawable.o);
-        }
-        if (game.valueAt(2) == CellValue.X) {
-            cell2.setImageResource(R.drawable.x);
-        } else if (game.valueAt(2) == CellValue.O) {
-            cell2.setImageResource(R.drawable.o);
-        }
-        if (game.valueAt(3) == CellValue.X) {
-            cell3.setImageResource(R.drawable.x);
-        } else if (game.valueAt(3) == CellValue.O) {
-            cell3.setImageResource(R.drawable.o);
-        }
-        if (game.valueAt(4) == CellValue.X) {
-            cell4.setImageResource(R.drawable.x);
-        } else if (game.valueAt(4) == CellValue.O) {
-            cell4.setImageResource(R.drawable.o);
-        }
-        if (game.valueAt(5) == CellValue.X) {
-            cell5.setImageResource(R.drawable.x);
-        } else if (game.valueAt(5) == CellValue.O) {
-            cell5.setImageResource(R.drawable.o);
-        }
-        if (game.valueAt(6) == CellValue.X) {
-            cell6.setImageResource(R.drawable.x);
-        } else if (game.valueAt(6) == CellValue.O) {
-            cell6.setImageResource(R.drawable.o);
-        }
-        if (game.valueAt(7) == CellValue.X) {
-            cell7.setImageResource(R.drawable.x);
-        } else if (game.valueAt(7) == CellValue.O) {
-            cell7.setImageResource(R.drawable.o);
-        }
-        if (game.valueAt(8) == CellValue.X) {
-            cell8.setImageResource(R.drawable.x);
-        } else if (game.valueAt(8) == CellValue.O) {
-            cell8.setImageResource(R.drawable.o);
+    private void update(int pos) {
+        switch (pos) {
+            case 0:
+                if (game.valueAt(0) == CellValue.X) {
+                    ImageViewAnimatedChange(getApplicationContext(), cell0, BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.x));
+                } else if (game.valueAt(0) == CellValue.O) {
+                    ImageViewAnimatedChange(getApplicationContext(), cell0, BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.o));
+                }
+                break;
+            case 1:
+                if (game.valueAt(1) == CellValue.X) {
+                    ImageViewAnimatedChange(getApplicationContext(), cell1, BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.x));
+                } else if (game.valueAt(1) == CellValue.O) {
+                    ImageViewAnimatedChange(getApplicationContext(), cell1, BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.o));
+                }
+                break;
+            case 2:
+                if (game.valueAt(2) == CellValue.X) {
+                    ImageViewAnimatedChange(getApplicationContext(), cell2, BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.x));
+                } else if (game.valueAt(2) == CellValue.O) {
+                    ImageViewAnimatedChange(getApplicationContext(), cell2, BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.o));
+                }
+                break;
+            case 3:
+                if (game.valueAt(3) == CellValue.X) {
+                    ImageViewAnimatedChange(getApplicationContext(), cell3, BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.x));
+                } else if (game.valueAt(3) == CellValue.O) {
+                    ImageViewAnimatedChange(getApplicationContext(), cell3, BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.o));
+                }
+                break;
+            case 4:
+                if (game.valueAt(4) == CellValue.X) {
+                    ImageViewAnimatedChange(getApplicationContext(), cell4, BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.x));
+                } else if (game.valueAt(4) == CellValue.O) {
+                    ImageViewAnimatedChange(getApplicationContext(), cell4, BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.o));
+                }
+                break;
+            case 5:
+                if (game.valueAt(5) == CellValue.X) {
+                    ImageViewAnimatedChange(getApplicationContext(), cell5, BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.x));
+                } else if (game.valueAt(5) == CellValue.O) {
+                    ImageViewAnimatedChange(getApplicationContext(), cell5, BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.o));
+                }
+                break;
+            case 6:
+                if (game.valueAt(6) == CellValue.X) {
+                    ImageViewAnimatedChange(getApplicationContext(), cell6, BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.x));
+                } else if (game.valueAt(6) == CellValue.O) {
+                    ImageViewAnimatedChange(getApplicationContext(), cell6, BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.o));
+                }
+                break;
+            case 7:
+                if (game.valueAt(7) == CellValue.X) {
+                    ImageViewAnimatedChange(getApplicationContext(), cell7, BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.x));
+                } else if (game.valueAt(7) == CellValue.O) {
+                    ImageViewAnimatedChange(getApplicationContext(), cell7, BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.o));
+                }
+                break;
+            case 8:
+                if (game.valueAt(8) == CellValue.X) {
+                    ImageViewAnimatedChange(getApplicationContext(), cell8, BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.x));
+                } else if (game.valueAt(8) == CellValue.O) {
+                    ImageViewAnimatedChange(getApplicationContext(), cell8, BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.o));
+                }
+                break;
         }
         if (game.getGameState() != GameState.PLAYING) {
             if (game.getGameState() == GameState.DRAW) {
@@ -183,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
     public void restart(View v) {
         game = new TicTacToeGame();
         reset();
+        Toast.makeText(getApplicationContext(), "Restart", Toast.LENGTH_LONG).show();
     }
 
     private void reset() {
@@ -195,5 +213,11 @@ public class MainActivity extends AppCompatActivity {
         cell6.setImageResource(R.drawable.empty);
         cell7.setImageResource(R.drawable.empty);
         cell8.setImageResource(R.drawable.empty);
+    }
+
+    public static void ImageViewAnimatedChange(Context c, final ImageView v, final Bitmap new_image) {
+        final Animation anim_in = AnimationUtils.loadAnimation(c, android.R.anim.fade_in);
+        v.startAnimation(anim_in);
+        v.setImageBitmap(new_image);
     }
 }

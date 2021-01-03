@@ -122,7 +122,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="30dp" />
+            android:layout_height="44dp" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/restart"
@@ -131,6 +131,12 @@
             android:layout_gravity="center"
             android:clickable="true"
             android:onClick="restart"
+            app:backgroundTint="#00BCD4"
+            app:elevation="0dp"
+            app:fabCustomSize="70dp"
+            app:fabSize="auto"
+            app:maxImageSize="40dp"
+            app:rippleColor="#FFFFFF"
             app:srcCompat="@drawable/ic_baseline_refresh_24" />
 
     </LinearLayout>
