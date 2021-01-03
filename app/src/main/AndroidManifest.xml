@@ -11,7 +11,8 @@
         android:theme="@style/Theme.AppCompat.Light">
         <activity
             android:name=".MainActivity"
-            android:label="TicTacToe">
+            android:label="TicTacToe"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
