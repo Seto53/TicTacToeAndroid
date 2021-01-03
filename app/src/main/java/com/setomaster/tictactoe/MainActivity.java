@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
     TicTacToeGame game = new TicTacToeGame();
     Random rand = new Random();
-    int firstPlayer = rand.nextInt(2);
-    int gameMode = 0;
+    int firstPlayer;
+    int gameMode;
     ImageView cell0;
     ImageView cell1;
     ImageView cell2;
@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView cell7;
     ImageView cell8;
     Button message;
+    Player player;
+    ComputerPerfectPlayer perfect = new ComputerPerfectPlayer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,42 +49,78 @@ public class MainActivity extends AppCompatActivity {
         cell6 = findViewById(R.id.cell6);
         cell7 = findViewById(R.id.cell7);
         cell8 = findViewById(R.id.cell8);
-        if (gameMode == 0) {
-            message.setText(game.nextCellValue() + " turn");
+        newPlayerVersusComputer0();
+    }
+
+    private void computerRandomPlay() {
+        update(((ComputerRandomPlayer) player).play(game));
+    }
+
+    private void computerPerfectPlay() {
+        update(((ComputerPerfectPlayer) player).play(game));
+    }
+
+    private void nextPlay(int pos) {
+        if (game.getGameState() == GameState.PLAYING) {
+            if (game.valueAt(pos) == CellValue.EMPTY) {
+                game.play(pos);
+                update(pos);
+                if (game.getGameState() == GameState.PLAYING) {
+                    if (gameMode == 1) {
+                        computerRandomPlay();
+                    } else if (gameMode == 2) {
+                        computerPerfectPlay();
+                    }
+                }
+            }
         }
     }
 
-    public void computerPlay() {
-        Random rand = new Random();
-        int rand_1;
-        do {
-            rand_1 = rand.nextInt(9);
-        } while (game.valueAt(rand_1) != CellValue.EMPTY);
-        game.play(rand_1);
-        update(rand_1);
+    private void newPlayerVersusPlayer(){
+        reset();
+        gameMode = 0;
+        firstPlayer = 0;
+        message.setText(game.nextCellValue() + " turn");
     }
 
-    public void nextPlay(int pos) {
-        if (game.valueAt(pos) == CellValue.EMPTY && game.getGameState() == GameState.PLAYING) {
-            game.play(pos);
-            update(pos);
-        }
-        if (gameMode == 0 && game.getGameState() == GameState.PLAYING) {
-            computerPlay();
-        }
-    }
-    public void playerVersusPlayer(View v) {
+    private void newPlayerVersusComputer0(){
         reset();
         gameMode = 1;
+        player = new ComputerRandomPlayer();
+        firstPlayer = rand.nextInt(2);
+        if(firstPlayer == 1){
+            computerRandomPlay();
+        }
+        message.setText(game.nextCellValue() + " turn");
+    }
+
+    private void newPlayerVersusPerfect(){
+        reset();
+        gameMode = 2;
+        player = perfect;
+        firstPlayer = rand.nextInt(2);
+        if(firstPlayer == 1){
+            computerPerfectPlay();
+        }
+        message.setText(game.nextCellValue() + " turn");
+    }
+
+    public void playerVersusPlayer(View v) {
         Toast.makeText(getApplicationContext(), "Player versus Player",
-                Toast.LENGTH_LONG).show();
+                Toast.LENGTH_SHORT).show();
+        newPlayerVersusPlayer();
     }
 
     public void playerVersusComputer0(View v) {
-        reset();
-        gameMode = 0;
-        Toast.makeText(getApplicationContext(), "Playing against computer",
-                Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Playing against easy computer",
+                Toast.LENGTH_SHORT).show();
+        newPlayerVersusComputer0();
+    }
+
+    public void playerVersusPerfect(View v) {
+        Toast.makeText(getApplicationContext(), "Playing against hard computer",
+                Toast.LENGTH_SHORT).show();
+        newPlayerVersusPerfect();
     }
 
     public void cell0(View v) {
@@ -201,7 +239,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void restart(View v) {
-        reset();
+        if(gameMode == 0){
+            newPlayerVersusPlayer();
+        }
+        else if(gameMode == 1){
+            newPlayerVersusComputer0();
+        }
+        else{
+            newPlayerVersusPerfect();
+        }
     }
 
     private void reset() {

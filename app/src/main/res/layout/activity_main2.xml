@@ -172,12 +172,28 @@
                 app:srcCompat="@drawable/cpu" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/playerVersusPerfect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:onClick="playerVersusPerfect"
+                app:backgroundTint="#FF1B1B"
+                app:elevation="0dp"
+                app:fabCustomSize="70dp"
+                app:maxImageSize="40dp"
+                app:srcCompat="@drawable/cpu" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/restart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="100dp"
-                android:layout_marginLeft="100dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginLeft="50dp"
                 android:clickable="true"
                 android:onClick="restart"
                 app:backgroundTint="#00BCD4"
