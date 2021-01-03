@@ -9,6 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -52,15 +53,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void computerPlay() {
-        if (game.getGameState() == GameState.PLAYING) {
-            Random rand = new Random();
-            int rand_1;
-            do {
-                rand_1 = rand.nextInt(9);
-            } while (game.valueAt(rand_1) != CellValue.EMPTY);
-            game.play(rand_1);
-            update(rand_1);
-        }
+        Random rand = new Random();
+        int rand_1;
+        do {
+            rand_1 = rand.nextInt(9);
+        } while (game.valueAt(rand_1) != CellValue.EMPTY);
+        game.play(rand_1);
+        update(rand_1);
     }
 
     public void nextPlay(int pos) {
@@ -71,6 +70,19 @@ public class MainActivity extends AppCompatActivity {
         if (gameMode == 0 && game.getGameState() == GameState.PLAYING) {
             computerPlay();
         }
+    }
+    public void playerVersusPlayer(View v) {
+        reset();
+        gameMode = 1;
+        Toast.makeText(getApplicationContext(), "Player versus Player",
+                Toast.LENGTH_LONG).show();
+    }
+
+    public void playerVersusComputer0(View v) {
+        reset();
+        gameMode = 0;
+        Toast.makeText(getApplicationContext(), "Playing against computer",
+                Toast.LENGTH_LONG).show();
     }
 
     public void cell0(View v) {
@@ -189,12 +201,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void restart(View v) {
-        game = new TicTacToeGame();
         reset();
-        message.setText(game.nextCellValue() + " turn");
     }
 
     private void reset() {
+        game = new TicTacToeGame();
+        message.setText(game.nextCellValue() + " turn");
         cell0.setImageResource(R.drawable.empty);
         cell1.setImageResource(R.drawable.empty);
         cell2.setImageResource(R.drawable.empty);

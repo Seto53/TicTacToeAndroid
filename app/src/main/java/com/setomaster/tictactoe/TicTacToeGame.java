@@ -184,6 +184,9 @@ public class TicTacToeGame {
 			level++;
 			setGameState(i);
 		}
+		else{
+			throw new IllegalStateException();
+		}
 
 	}
 
