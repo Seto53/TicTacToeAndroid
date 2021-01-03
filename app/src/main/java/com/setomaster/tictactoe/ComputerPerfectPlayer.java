@@ -4,22 +4,22 @@ import java.util.LinkedList;
 
 public class ComputerPerfectPlayer extends Player {
 
-	private LinkedList<LinkedList<PerfectTicTacToeGame>> allGames;
+	private final LinkedList<LinkedList<PerfectTicTacToeGame>> allGames;
 
 	public ComputerPerfectPlayer(){
 		super();
 
-		allGames = new LinkedList<LinkedList<PerfectTicTacToeGame>>();
+		allGames = new LinkedList<>();
 
 		// start with the empty game
-		allGames.add(new LinkedList<PerfectTicTacToeGame>());
+		allGames.add(new LinkedList<>());
 		allGames.get(0).add(new PerfectTicTacToeGame());
 
 		//build the new games by adding the next moves to the
 		// previously built games
 		for(int i=1; i<= 9; i++) {
 			LinkedList<PerfectTicTacToeGame> newList;
-			newList = new LinkedList<PerfectTicTacToeGame>();
+			newList = new LinkedList<>();
 			allGames.add(newList);
 			for(PerfectTicTacToeGame game: allGames.get(i-1)){
 				if(game.getGameState() == GameState.PLAYING) {

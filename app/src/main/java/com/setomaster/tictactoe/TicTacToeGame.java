@@ -14,7 +14,7 @@ public class TicTacToeGame {
    /**
 	* The board of the game, stored as a single array.
 	*/
-	private CellValue[] board;
+	private final CellValue[] board;
 
 
    /**
@@ -69,7 +69,7 @@ public class TicTacToeGame {
 	/**
      * instance variable to record the transformations for that particular board
      */
-    private  Transformation[] allTransformations;
+    private final Transformation[] allTransformations;
 
     /**
      * records how far we are in the list of transformations
@@ -95,20 +95,7 @@ public class TicTacToeGame {
 		this(3,3,3);
 	}
 
-   /**
-	* constructor allowing to specify the number of lines
-	* and the number of columns for the game. 3 cells must
-	* be aligned.
-   	* @param lines
-    *  the number of lines in the game
-    * @param columns
-    *  the number of columns in the game
-  	*/
-	public TicTacToeGame(int lines, int columns){
-		this(lines, columns, 3);
-	}
-
-   /**
+	/**
 	* constructor allowing to specify the number of lines
 	* and the number of columns for the game, as well as
 	* the number of cells that must be aligned to win.
@@ -170,9 +157,7 @@ public class TicTacToeGame {
 		}
 
 		board = new CellValue[lines*columns];
-		for(int i = 0; i < lines*columns ; i ++) {
-			board[i] = base.board[i];
-		}
+		if (lines * columns >= 0) System.arraycopy(base.board, 0, board, 0, lines * columns);
 
 		// allTransformations doesn't change so we can share the reference here
 		allTransformations = base.allTransformations;
@@ -403,46 +388,6 @@ public class TicTacToeGame {
 			default:
 				throw new IllegalArgumentException("cannot set Game State to value " + value);
 		}
-	}
-
-
-   /**
-	* Returns a String representation of the game matching
-	* the example provided in the assignment's description
-	*
-   	* @return
-    *  String representation of the game
-  	*/
-
-	public String toString(){
-		String res = "";
-		for(int i = 0; i < lines ; i++){
-			if(i>0) {
-				for(int j = 0; j < 4*columns - 1; j++){
-					res+="-";
-				}
-				res+= Utils.NEW_LINE;
-			}
-			for(int j = 0; j < columns ; j++){
-				switch(board[i*columns + j]){
-					case X:
-						res+= " X ";
-						break;
-					case O:
-						res+= " O ";
-						break;
-					default:
-						res+=  "   ";
-				}
-				if(j<columns - 1){
-					res += "|";
-				} else{
-					res += Utils.NEW_LINE;
-				}
-			}
-		}
-		return res ;
-
 	}
 
 

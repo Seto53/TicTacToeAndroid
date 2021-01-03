@@ -6,7 +6,7 @@ public class PerfectTicTacToeGame extends TicTacToeGame {
 	public static final int WIN  = 1;
 	public static final int LOSE = 2;
 	public static final int DRAW = 3;
-	private int[] outcomes;
+	private final int[] outcomes;
 	private int gameOutcome;
 
 	public PerfectTicTacToeGame(){

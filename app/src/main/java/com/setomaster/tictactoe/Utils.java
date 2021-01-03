@@ -5,12 +5,9 @@ import java.io.Console;
 
 public class Utils {
 	public static final Random generator = new Random();
-	public static final Console console = System.console();
-	public static final String NEW_LINE = System.getProperty("line.separator");
 
 
-
-    /**
+	/**
      * rotates the game
      *
      * 1 | 2 | 3
@@ -43,9 +40,7 @@ public class Utils {
     	int[] tmp;
     	tmp = new int[transformedBoard.length];
 
-    	for(int i =0 ; i < transformedBoard.length; i++) {
-	                tmp[i] = transformedBoard[i];
-	    }
+		System.arraycopy(transformedBoard, 0, tmp, 0, transformedBoard.length);
 
     	for(int i =0 ; i < columns; i++) {
     		for(int j = 0; j < lines ; j++) {
